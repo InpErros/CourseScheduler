@@ -1,4 +1,4 @@
-package Person;
+package data.Person;
 
 /**
  * <h1>Person</h1>

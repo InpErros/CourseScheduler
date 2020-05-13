@@ -1,4 +1,4 @@
-package Algorithms;
+package app.Algorithms;
 
 public class GenerateID {
     public String generateStudentID(){

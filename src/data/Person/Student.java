@@ -1,7 +1,7 @@
-package Person;
+package data.Person;
 
 import java.util.Date;
-import Algorithms.*;
+import app.Algorithms.*;
 
 
 /**
