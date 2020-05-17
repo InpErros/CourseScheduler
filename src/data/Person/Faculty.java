@@ -1,6 +1,7 @@
 package data.Person;
 
-import app.Algorithms.GenerateID;
+import app.Algorithms.FacultyIDGenerator;
+
 import java.util.Date;
 
 public class Faculty extends Person{
@@ -23,10 +24,10 @@ public class Faculty extends Person{
 
     /**
      * Overridden Mutator method using a faculty specific algorithm to generate a unique ID
-     * @see app.Algorithms.GenerateID
+     * @see FacultyIDGenerator
      */
     @Override
     public void setID() {
-        id = new GenerateID().generateFacultyID();
+        id = new FacultyIDGenerator().generateID();
     }
 }

@@ -66,11 +66,11 @@ public class Student extends Person{
 
     /**
      * Overridden Mutator Method using a student specific algorithm to generate a unique ID
-     * @see Algorithms.GenerateID
+     * @see StudentIDGenerator
      */
     @Override
     public void setID() {
-        id = new GenerateID().generateStudentID();
+        id = new StudentIDGenerator().generateID();
     }
 
 
