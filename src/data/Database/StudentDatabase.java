@@ -10,10 +10,20 @@ import app.Algorithms.IDgenerator;
 import data.Exception.StudentNotFoundException;
 import data.Person.*;
 
+/**
+ * {@code StudentDatabase} defines a static database that reads, writes, and holds all information about students
+ * @see Database
+ * @see Student
+ * @author Lucas Demchik
+ * @version 0.1
+ */
 public class StudentDatabase implements Database{
     private final static StudentDatabase sdb = new StudentDatabase();
     private ArrayList<Student> db;
 
+    /**
+     * Initializes the database from a file
+     */
     private StudentDatabase(){
         db = new ArrayList<>();
         try{
@@ -27,11 +37,22 @@ public class StudentDatabase implements Database{
         }
     }
 
+    /**
+     * @return a reference to the StudentDatabase instance
+     */
     public static StudentDatabase getInstance(){ return sdb; }
 
+    /**
+     * @return a reference to the ArrayList
+     */
     public ArrayList<Student> getDatabase() { return db; }
 
-    private void loadDatabase() throws FileNotFoundException, NumberFormatException {
+    /**
+     * Loads databse with {@code Students} by reading from an input file
+     * @throws FileNotFoundException if the file cannot be found
+     * @see Student
+     */
+    private void loadDatabase() throws FileNotFoundException{
 
         File file = new File("src\\data\\Input\\student.txt");
         Scanner input = new Scanner(file);
@@ -49,6 +70,11 @@ public class StudentDatabase implements Database{
         input.close();
     }
 
+    /**
+     * Checks IDs of each Student in the database and generates them if they have not been generated.
+     * @param generatorAlgorithm the id generation algorithm
+     * @see IDgenerator
+     */
     public void checkIds(IDgenerator generatorAlgorithm){
         for(Student s: db){ // For Each Student in the Database
             if(s.getID().equals(" ")){ // If the ID has not been made yet
@@ -58,6 +84,11 @@ public class StudentDatabase implements Database{
         }
     }
 
+    /**
+     * Overwrites the database to the input file to update with any changes made during runtime.
+     * Should be called at the end of the program
+     * @throws IOException if the file fails to be written
+     */
     public void close() throws  IOException {
         BufferedWriter output = Files.newBufferedWriter(Paths.get("src\\data\\Input\\student.txt"));
         for(Student s: db){
@@ -66,6 +97,11 @@ public class StudentDatabase implements Database{
         output.close();
     }
 
+    /**
+     * @param id a Student ID
+     * @return a reference to the Student in the database
+     * @throws StudentNotFoundException if the Student cannot be found
+     */
     public Student findStudent(String id) throws StudentNotFoundException{
         Student result = new Student();
         boolean found = false;

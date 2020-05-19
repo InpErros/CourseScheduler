@@ -2,6 +2,13 @@ package data.Course;
 
 import java.util.Comparator;
 
+/**
+ * {@code Course} defines a college course
+ * @see Session
+ * @see data.Database.CourseDatabase
+ * @author Lucas Demchik
+ * @version 0.1
+ */
 public class Course {
     private String department;
     private String code;
@@ -9,6 +16,9 @@ public class Course {
     private int minStudentCount;
     private int maxStudentCount;
 
+    /**
+     * Initializes data with blank strings
+     */
     public Course() {
         this.department = " ";
         this.code = " ";
@@ -17,6 +27,14 @@ public class Course {
         this.minStudentCount = 0;
     }
 
+    /**
+     * Initializes course with the appropriate data
+     * @param department
+     * @param code
+     * @param description
+     * @param minStudentCount
+     * @param maxStudentCount
+     */
     public Course(String department, String code, String description, int minStudentCount, int maxStudentCount) {
         this.department = department;
         this.code = code;
@@ -25,6 +43,10 @@ public class Course {
         this.maxStudentCount = maxStudentCount;
     }
 
+    /**
+     * Initializes a new Course object as a copy of another
+     * @param c Course object to be copied
+     */
     public Course(Course c){
         this.department = c.department;
         this.code = c.code;
@@ -93,12 +115,21 @@ public class Course {
      */
     public void setMaxStudentCount(int maxStudentCount) { this.maxStudentCount = maxStudentCount; }
 
+    /**
+     * @return a string that represents the objects data
+     */
     @Override
     public String toString() {
         return "Course ID: " + getDepartment() + getCode() + "\n" + getDescription() + "\nMin. Students: " + getMinStudentCount() + " Max. Students: " + getMaxStudentCount() + "\n";
     }
 
     public static Comparator<Course> courseComparator = new Comparator<Course>() {
+        /**
+         * Compares to Courses based of their Course id
+         * @param s1 the first Course
+         * @param s2 the second Course
+         * @return the result of the comparison
+         */
         @Override
         public int compare(Course s1, Course s2) {
             String course1 = s1.getDepartment() + s1.getCode();
@@ -107,4 +138,6 @@ public class Course {
             return course1.compareTo(course2);
         }
     };
+
+
 }

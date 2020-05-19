@@ -3,12 +3,11 @@ package data.Person;
 import app.Algorithms.IDgenerator;
 
 /**
- * <h1>Person</h1>
  * {@code Person} and its subclasses define members of a school
- *
+ * @see Student
+ * @see Faculty
  * @author Lucas Demchik
  * @version 0.1
- * @since May 2020
  */
 public abstract class Person {
     private String firstName;
@@ -27,7 +26,7 @@ public abstract class Person {
 
 
     /**
-     * {@code Constructor}
+     * {@code Constructor} that initializes a person object with given data
      * @param firstName
      * @param middleName
      * @param lastName
@@ -54,6 +53,10 @@ public abstract class Person {
         this.id = " ";
     }
 
+    /**
+     * Initializes a new person as a copy of another
+     * @param p object to be copied
+     */
     public Person(Person p){
         this.firstName = p.firstName;
         this.middleName = p.middleName;
@@ -188,11 +191,32 @@ public abstract class Person {
      */
     public String getID() { return id; }
 
+    /**
+     * Accessor Method
+     * @return the id generator algorithm
+     */
     public IDgenerator getGeneratorAlgorithm() { return generatorAlgorithm; }
 
+    /**
+     * Mutator Method
+     * @param generatorAlgorithm the id generator algorithm
+     */
     public void setGeneratorAlgorithm(IDgenerator generatorAlgorithm) { this.generatorAlgorithm = generatorAlgorithm; }
 
+    /**
+     * Abstract method to be overloaded by subclasses
+     * @return an output string
+     */
     public abstract String toOutputString();
 
-
+    /**
+     * @return a string representation of the object
+     */
+    @Override
+    public String toString() {
+        return firstName + " " + middleName + " " + lastName + "\n"
+                + "Email: " + email + "\nPhone#: " + phone + "\n"
+                + address + " " + city + ", " + state + " "  + zip
+                + "\n";
+    }
 }

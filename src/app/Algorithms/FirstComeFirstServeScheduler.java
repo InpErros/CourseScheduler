@@ -7,6 +7,13 @@ import data.Person.*;
 
 import java.util.ArrayList;
 
+/**
+ * {@code FirstComeFirstServeScheduler} is an algorithm that schedules sessions in a first come first serve manner.
+ * This algorithm can be swapped out at runtime due to its implementation of {@code Scheduler}
+ * @see Scheduler
+ * @author Lucas Demchik
+ * @version 0.1
+ */
 public class FirstComeFirstServeScheduler implements Scheduler {
     private final SessionWishlist swl = SessionWishlist.getInstance();
     private ArrayList<Session> tempSessions;
@@ -15,6 +22,9 @@ public class FirstComeFirstServeScheduler implements Scheduler {
     private ArrayList<Course> tempUnSessions;
     private ArrayList<Student> tempUnStudents;
 
+    /**
+     * Initializes the ArrayLists
+     */
     public FirstComeFirstServeScheduler(){
         tempSessions = new ArrayList<>();
         tempScheduledStudents = new ArrayList<>();
@@ -23,6 +33,10 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         tempUnStudents = new ArrayList<>();
     }
 
+    /**
+     * Takes in a {@code Schedule} object and fills its ArrayLists with the corresponding data
+     * @param schedule the Schedule object
+     */
     @Override
     public void schedule(Schedule schedule) {
         Session currentSession;
@@ -34,7 +48,7 @@ public class FirstComeFirstServeScheduler implements Scheduler {
                     addInstructor(currentSession); // and assign it an instructor
                 }
                 else {
-                    currentSession = findSession(requestedCourse, schedule.getGeneratorAlgorithm()); // Other wise find the NotFullSession
+                    currentSession = findSession(requestedCourse); // Other wise find the NotFullSession
                 }
                 addStudent(currentSession, request.getStudent()); // Add the student to the session
             }
@@ -43,6 +57,7 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         parseSessions();
         parseInstructors();
         parseStudents();
+        parseCourses();
         sortAndMoveScheduledSessions(schedule);
         sortAndMoveUnscheduledSessions(schedule);
         moveFaculty(schedule);
@@ -58,6 +73,10 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         // move unscheduled student list to schedule
     }
 
+    /**
+     * checks if the requestedCourse has an available session to assign a student too
+     * @param requestedCourse the course requested to have a session
+     */
     public boolean hasNotFullSession(Course requestedCourse){
         boolean found = false;
         for(Session session: tempSessions){
@@ -72,12 +91,21 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         return found;
     }
 
+    /**
+     * @param requestedCourse the course requested to have a session
+     * @param generatorAlgorithm the algorithm for generating the sessions id
+     * @return a Session of the requestedCourse with an ID
+     */
     public Session makeSession(Course requestedCourse, IDgenerator generatorAlgorithm){
         tempSessions.add(new Session(requestedCourse, generatorAlgorithm));
         return tempSessions.get(tempSessions.size() - 1);
     }
 
-    public Session findSession(Course requestedCourse, IDgenerator generatorAlgorithm){
+    /**
+     * @param requestedCourse the course requested to have a session
+     * @return returns a "Not Full" session to assign a student too
+     */
+    public Session findSession(Course requestedCourse){
         Session foundSession = new Session();
         for(Session session: tempSessions){ // For every temp session
             if(session.getDepartment().equals(requestedCourse.getDepartment())){ // Check department
@@ -91,6 +119,10 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         return foundSession;
     }
 
+    /**
+     * assigns a Faculty to the {@code currentSession} and adds the Corresponding {@code Course} to the Instructors Course List
+     * @param currentSession the current session being filled
+     */
     public void addInstructor(Session currentSession){
         Configuration config = Configuration.getInstance();
         FacultyDatabase fdb = FacultyDatabase.getInstance();
@@ -116,6 +148,11 @@ public class FirstComeFirstServeScheduler implements Scheduler {
 
     }
 
+    /**
+     * adds a student to the {@code currentSession} and adds the corresponding {@code Course} to the Students Course List
+     * @param currentSession the current session being filled
+     * @param student the student being added to the session
+     */
     public void addStudent(Session currentSession, Student student){
         Configuration config = Configuration.getInstance();
 
@@ -140,6 +177,9 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         }
     }
 
+    /**
+     * Removes Sessions which do not have enough students from the scheduled sessions list
+     */
     public void parseSessions(){
         for(Session s: tempSessions){
             if(s.getStudents().size() < s.getMinStudentCount()){
@@ -150,6 +190,9 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         }
     }
 
+    /**
+     * Removes Sessions which do not have an Instructor from the scheduled sessions list
+     */
     public void parseInstructors(){
         for(Session s: tempSessions){
             if(s.getInstructor().getID().equals(" ")){
@@ -159,6 +202,11 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         }
     }
 
+    /**
+     * Removes an Instructor from the {@code Session}
+     * and removes the {@code Course} from the Instructors Course List if it was the only session of the given course they taught
+     * @param session the session being unscheduled
+     */
     public void unAssignInstructor(Session session){
         boolean remove = true;
 
@@ -184,6 +232,10 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         }
     }
 
+    /**
+     * Removes Students from the {@code Session} and removes the {@code Session} from the Students course list
+     * @param session the session being unscheduled
+     */
     public void unScheduleStudents(Session session){
         for(Student s: session.getStudents()){ // for all the students assigned to the course
             for(ScheduledStudent st: tempScheduledStudents){
@@ -197,17 +249,49 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         }
     }
 
+    /**
+     * Adds all students not taking courses to the unscheduled students list
+     */
     public void parseStudents(){
         StudentDatabase sdb = StudentDatabase.getInstance();
+        boolean found = false;
+
         for(Student s: sdb.getDatabase()){ // For every Student
             for(ScheduledStudent st: tempScheduledStudents) { // Look for them on the scheduled students list
-                if(!s.getID().equals(st.getID())){ // If student is not on the list
-                    tempUnStudents.add(s); // add them to the unscheduled list
+                if(s.getID().equals(st.getID())){ // If student is on the list
+                    found = true;
+                    break;
                 }
+            }
+            if(!found){
+                tempUnStudents.add(s); // add them to the unscheduled list
             }
         }
     }
 
+    /**
+     * Adds all courses without any session to the unscheduled sessions list
+     */
+    public void parseCourses(){
+        CourseDatabase cdb = CourseDatabase.getInstance();
+        boolean found = false;
+        for(Course c: cdb.getDatabase()){
+            for(Session s: tempSessions){
+                if( (c.getDepartment().equals(s.getDepartment())) && (c.getCode().equals(s.getCode())) ){ // If Course is Scheduled
+                    found = true;
+                    break;
+                }
+            }
+            if(!found){
+                tempUnSessions.add(c);
+            }
+        }
+    }
+
+    /**
+     * Sorts the scheduled sessions in alphabetic order based of the course id and then moves them to the schedule object
+     * @param schedule the schedule object
+     */
     public void sortAndMoveScheduledSessions(Schedule schedule){
         tempSessions.sort(Session.courseComparator);
         for(Session s: tempSessions){
@@ -215,6 +299,10 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         }
     }
 
+    /**
+     * Sorts the unscheduled session in alphabetic order based of the course id and the moves them to the schedule object
+     * @param schedule the schedule object
+     */
     public void sortAndMoveUnscheduledSessions(Schedule schedule){
         tempUnSessions.sort(Course.courseComparator);
         for(Course c: tempUnSessions){
@@ -222,22 +310,36 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         }
     }
 
+    /**
+     * Moves the faculty list to the schedule object
+     * @param schedule the schedule object
+     */
     public void moveFaculty(Schedule schedule){
         for(Instructor i: tempFaculty){
             schedule.getFaculty().add(i);
         }
     }
 
+    /**
+     * Moves the scheduled students list to the schedule object
+     * @param schedule the schedule object
+     */
     public void moveScheduledStudents(Schedule schedule){
         for(ScheduledStudent ss: tempScheduledStudents){
             schedule.getScheduledStudents().add(ss);
         }
     }
 
+    /**
+     * Moves the unscheduled students list to the schedule object
+     * @param schedule the schedule object
+     */
     public void moveUnscheduledStudents(Schedule schedule){
         for(Student s: tempUnStudents){
             schedule.getUnscheduledStudents().add(s);
         }
     }
+
+
 
 }
