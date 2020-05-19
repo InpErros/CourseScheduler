@@ -1,6 +1,5 @@
 package data.Person;
 
-import java.util.Date;
 import app.Algorithms.*;
 
 
@@ -14,64 +13,90 @@ import app.Algorithms.*;
  * @since May 2020
  */
 public class Student extends Person{
-    private Date dateOfBirth;
-    private double gpa;
-    private Date registrationDate;
+    private String dateOfBirth;
+    private String gpa;
+    private String registrationDate;
+
+    public Student(){
+        super(" ", " ", " ", " ", " ", " ", " ", " ", " ");
+        this.dateOfBirth = " ";
+        this.gpa = " ";
+        this.registrationDate = " ";
+    }
 
     public Student(String firstName, String middleName, String lastName,
                    String email, String phone, String address, String city,
-                   String state, String zip, Date dateOfBirth, double gpa,
-                   Date registrationDate){
-        super(firstName, middleName, lastName, email, phone, address, city, state, zip);
+                   String state, String zip, String dateOfBirth, String gpa,
+                   String registrationDate){
+        super(firstName, middleName, lastName, email, phone, address, city,
+                   state, zip);
         this.dateOfBirth = dateOfBirth;
         this.gpa = gpa;
         this.registrationDate = registrationDate;
+    }
+
+    public Student(String firstName, String middleName, String lastName,
+                   String email, String phone, String address, String city,
+                   String state, String zip, String dateOfBirth, String gpa,
+                   String registrationDate, String id){
+        super(firstName, middleName, lastName, email, phone, address, city,
+                   state, zip);
+        this.dateOfBirth = dateOfBirth;
+        this.gpa = gpa;
+        this.registrationDate = registrationDate;
+        this.id = id;
     }
 
     /**
      * Accessor Method
      * @return dateOfBirth
      */
-    public Date getDateOfBirth() { return dateOfBirth; }
+    public String getDateOfBirth() { return dateOfBirth; }
 
     /**
      * Mutator Method
-     * @param dateOfBirth
+     * @param dateOfBirth new value
      */
-    public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+    public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 
     /**
      * Accessor Method
      * @return gpa
      */
-    public double getGpa() { return gpa; }
+    public String getGpa() { return gpa; }
 
     /**
      * Mutator Method
-     * @param gpa
+     * @param gpa new value
      */
-    public void setGpa(double gpa) { this.gpa = gpa; }
+    public void setGpa(String gpa) { this.gpa = gpa; }
 
     /**
      * Accessor Method
      * @return registrationDate
      */
-    public Date getRegistrationDate() { return registrationDate; }
+    public String getRegistrationDate() { return registrationDate; }
 
     /**
      * Mutator Method
-     * @param registrationDate
+     * @param registrationDate new value
      */
-    public void setRegistrationDate(Date registrationDate) { this.registrationDate = registrationDate; }
+    public void setRegistrationDate(String registrationDate) { this.registrationDate = registrationDate; }
 
     /**
-     * Overridden Mutator Method using a student specific algorithm to generate a unique ID
-     * @see StudentIDGenerator
+     * Overridden Method using a algorithm selected at runtime to generate the ID
+     * @see IDgenerator
      */
     @Override
-    public void setID() {
-        id = new StudentIDGenerator().generateID();
+    public void makeID() {
+        id = "s" + getGeneratorAlgorithm().generateID();
     }
 
-
+    @Override
+    public String toOutputString(){
+        return getFirstName() + "," + getMiddleName() + "," + getLastName()
+                + "," + getEmail() + "," + getPhone() + "," + getAddress()
+                + "," + getCity() + "," + getState() + "," + getZip() + "," + dateOfBirth
+                + "," + gpa  + "," + registrationDate + "," + getID() + ",";
+    }
 }

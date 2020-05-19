@@ -1,33 +1,48 @@
 package data.Person;
 
-import app.Algorithms.FacultyIDGenerator;
-
-import java.util.Date;
-
 public class Faculty extends Person{
-    private Date hireDate;
-    private boolean tenured;
+    private String hireDate;
+    private String tenured;
 
     public Faculty(String firstName, String middleName, String lastName,
                    String email, String phone, String address, String city,
-                   String state, String zip, Date hireDate, boolean tenured){
+                   String state, String zip, String hireDate, String tenured){
 
         super(firstName, middleName, lastName, email, phone, address, city, state, zip);
         this.hireDate = hireDate;
         this.tenured = tenured;
     }
 
-    public Date getHireDate() { return hireDate; }
-    public void setHireDate(Date hireDate) { this.hireDate = hireDate; }
-    public boolean isTenured() { return tenured; }
-    public void setTenured(boolean tenured) { this.tenured = tenured; }
+    public Faculty(String firstName, String middleName, String lastName,
+                   String email, String phone, String address, String city,
+                   String state, String zip, String hireDate, String tenured,
+                   String id){
+
+        super(firstName, middleName, lastName, email, phone, address, city, state, zip);
+        this.hireDate = hireDate;
+        this.tenured = tenured;
+        this.id = id;
+    }
+
+    public String getHireDate() { return hireDate; }
+    public void setHireDate(String hireDate) { this.hireDate = hireDate; }
+    public String isTenured() { return tenured; }
+    public void setTenured(String tenured) { this.tenured = tenured; }
 
     /**
-     * Overridden Mutator method using a faculty specific algorithm to generate a unique ID
-     * @see FacultyIDGenerator
+     * Overridden method using algorithm selected at runtime to generate the ID
+     * @see app.Algorithms.IDgenerator
      */
     @Override
-    public void setID() {
-        id = new FacultyIDGenerator().generateID();
+    public void makeID() {
+        id = "f" + getGeneratorAlgorithm().generateID();
+    }
+
+    @Override
+    public String toOutputString() {
+        return getFirstName() + "," + getMiddleName() + "," + getLastName()
+                + "," + getEmail() + "," + getPhone() + "," + getAddress()
+                + "," + getCity() + "," + getState() + "," + getZip() + "," + getHireDate()
+                + "," + isTenured() + "," + getID() + ",";
     }
 }

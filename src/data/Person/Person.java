@@ -1,5 +1,7 @@
 package data.Person;
 
+import app.Algorithms.IDgenerator;
+
 /**
  * <h1>Person</h1>
  * {@code Person} and its subclasses define members of a school
@@ -19,6 +21,7 @@ public abstract class Person {
     private String state;
     private String zip;
     protected String id;
+    private IDgenerator generatorAlgorithm;
 
     public Person(){}
 
@@ -48,6 +51,7 @@ public abstract class Person {
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.id = " ";
     }
 
     /**
@@ -164,11 +168,17 @@ public abstract class Person {
      * @see Student
      * @see Faculty
      */
-    public abstract void setID();
+    public abstract void makeID();
 
     /**
      * Accessor Method
      * @return id
      */
     public String getID() { return id; }
+
+    public IDgenerator getGeneratorAlgorithm() { return generatorAlgorithm; }
+
+    public void setGeneratorAlgorithm(IDgenerator generatorAlgorithm) { this.generatorAlgorithm = generatorAlgorithm; }
+
+    public abstract String toOutputString();
 }
