@@ -33,7 +33,6 @@ public class StudentDatabase implements Database{
 
     private void loadDatabase() throws FileNotFoundException, NumberFormatException {
 
-                // "C:\Users\lucas\Documents\GitHub\CourseScheduler\src\data\input\student.txt"
         File file = new File("src\\data\\Input\\student.txt");
         Scanner input = new Scanner(file);
 
