@@ -19,7 +19,14 @@ public class Schedule {
     public Schedule(IDgenerator generatorAlgorithm, Scheduler schedulerAlgorithm){
         this.generatorAlgorithm = generatorAlgorithm;
         this.schedulerAlgorithm = schedulerAlgorithm;
-        schedulerAlgorithm.schedule(this);
+
+        scheduledCourseSessions = new ArrayList<>();
+        unscheduledCourses = new ArrayList<>();
+        faculty = new ArrayList<>();
+        scheduledStudents =  new ArrayList<>();
+        unscheduledStudents = new ArrayList<>();
+
+        this.schedulerAlgorithm.schedule(this);
     }
 
     public void setSchedulerAlgorithm(Scheduler schedulerAlgorithm) { this.schedulerAlgorithm = schedulerAlgorithm; }
@@ -46,4 +53,5 @@ public class Schedule {
 
     public void setUnscheduledStudents(ArrayList<Student> unscheduledStudents) { this.unscheduledStudents = unscheduledStudents; }
 
+    public IDgenerator getGeneratorAlgorithm() { return generatorAlgorithm; }
 }
