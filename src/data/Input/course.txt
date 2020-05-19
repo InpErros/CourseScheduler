@@ -1,0 +1,16 @@
+CS,1A,Introduction to C++,2,5
+CS,1B,Intermediate Studies of C++,2,5
+CS,1C,Advanced Studies of C++,2,5
+CS,1D,Data Structures and Algorithms in C++,2,5
+CS,4A,Introduction to Java,2,5
+CS,4B,Advanced Studies of Java,2,5
+BIO,1A,Introduction to Biology,2,5
+BIO,1B,Intermediate Biology,2,5
+BIO,2A,Introduction to Micro-Biology,2,5
+BIO,2B,Advanced Micro-Biology,2,5
+BIO,3A,Introduction to Anatomy,2,5
+BIO,4A,Introduction to Evolution,2,5
+ENG,1A,College English,2,5
+ENG,1B,More College English,2,5
+ENG,2A,Reading for College Students,2,5
+ENG,2B,More Reading for College Students,2,5

@@ -1,0 +1,8 @@
+James,Jameson,Clumper,jamesonclumper@gmail.com,815-546-9852,458 Newton Street,Goodland,IN,47946,12/02/1995,4.0,08/10/2020,s7132358,
+Philemon,Guierrez,Gomez,phil102095@hotmail.com,714-712-4348,625 Roadsign Lane,Talabassas,FL,19843,04/29/1997,4.0,08/10/2020,s7137730,
+Sir Henry,Ivan,Thomas,sirhenryit@gmail.com,894-526-7846,276 Ghardena Court,Mississity,MS,89673,06/12/2001,4.0,08/10/2020,s6507301,
+Mark,Mark,Markson,markmanll@gmail.com,637-241-7575,483 Malamut Lane,Farlton,MI,53186,10/31/2000,4.0,08/10/2020,s7554105,
+Claudio,Uvewe,Nettos-Terrosso,galefeeling@yahoo.com,214-846-2687,689 Rhoades Lane,Ballington,AZ,74623,03/24/1999,4.0,08/10/2020,s3157660,
+Steve,Stephen,Jobs,steve@jobs.com,555-518-2398,297 Applestore Lane,iTown,TX,31975,01/24/1999,4.0,08/10/2020,s4218581,
+Hingle,McCringle,Berry,hberry@me.com,987-101-1337,328 Lunar Drive,Penumbra,CO,35941,08/12/2000,4.0,08/10/2020,s3233101,
+Thomas,Michael,Heidgar,theidgar@gmail.com,930-234-2349,2 Penny Lane,Porledraun,AZ,11995,05/21/1996,4.0,08/10/2020,s6173604,
