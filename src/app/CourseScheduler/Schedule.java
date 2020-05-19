@@ -12,8 +12,8 @@ public class Schedule {
 
     private ArrayList<Session> scheduledCourseSessions;
     private ArrayList<Course> unscheduledCourses;
-    private ArrayList<Faculty> faculty;
-    private ArrayList<Student> scheduledStudents;
+    private ArrayList<Instructor> faculty;
+    private ArrayList<ScheduledStudent> scheduledStudents;
     private ArrayList<Student> unscheduledStudents;
 
     public Schedule(IDgenerator generatorAlgorithm, Scheduler schedulerAlgorithm){
@@ -34,13 +34,13 @@ public class Schedule {
 
     public void setUnscheduledCourses(ArrayList<Course> unscheduledCourses) { this.unscheduledCourses = unscheduledCourses; }
 
-    public ArrayList<Faculty> getFaculty() { return faculty; }
+    public ArrayList<Instructor> getFaculty() { return faculty; }
 
-    public void setFaculty(ArrayList<Faculty> faculty) { this.faculty = faculty; }
+    public void setFaculty(ArrayList<Instructor> faculty) { this.faculty = faculty; }
 
-    public ArrayList<Student> getScheduledStudents() { return scheduledStudents; }
+    public ArrayList<ScheduledStudent> getScheduledStudents() { return scheduledStudents; }
 
-    public void setScheduledStudents(ArrayList<Student> scheduledStudents) { this.scheduledStudents = scheduledStudents; }
+    public void setScheduledStudents(ArrayList<ScheduledStudent> scheduledStudents) { this.scheduledStudents = scheduledStudents; }
 
     public ArrayList<Student> getUnscheduledStudents() { return unscheduledStudents; }
 
