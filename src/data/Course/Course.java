@@ -1,5 +1,7 @@
 package data.Course;
 
+import java.util.Comparator;
+
 public class Course {
     private String department;
     private String code;
@@ -21,6 +23,14 @@ public class Course {
         this.description = description;
         this.minStudentCount = minStudentCount;
         this.maxStudentCount = maxStudentCount;
+    }
+
+    public Course(Course c){
+        this.department = c.department;
+        this.code = c.code;
+        this.description = c.description;
+        this.minStudentCount = c.minStudentCount;
+        this.maxStudentCount = c.maxStudentCount;
     }
 
     /**
@@ -87,4 +97,14 @@ public class Course {
     public String toString() {
         return "Course ID: " + getDepartment() + getCode() + "\n" + getDescription() + "\nMin. Students: " + getMinStudentCount() + " Max. Students: " + getMaxStudentCount() + "\n";
     }
+
+    public static Comparator<Course> courseComparator = new Comparator<Course>() {
+        @Override
+        public int compare(Course s1, Course s2) {
+            String course1 = s1.getDepartment() + s1.getCode();
+            String course2 = s2.getDepartment() + s2.getCode();
+
+            return course1.compareTo(course2);
+        }
+    };
 }

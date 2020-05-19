@@ -54,6 +54,18 @@ public abstract class Person {
         this.id = " ";
     }
 
+    public Person(Person p){
+        this.firstName = p.firstName;
+        this.middleName = p.middleName;
+        this.lastName = p.lastName;
+        this.email = p.email;
+        this.phone = p.phone;
+        this.address = p.address;
+        this.city = p.city;
+        this.state = p.state;
+        this.zip = p.zip;
+    }
+
     /**
      * Mutator method
      * @param firstName
@@ -181,4 +193,6 @@ public abstract class Person {
     public void setGeneratorAlgorithm(IDgenerator generatorAlgorithm) { this.generatorAlgorithm = generatorAlgorithm; }
 
     public abstract String toOutputString();
+
+
 }

@@ -4,7 +4,9 @@ import app.Algorithms.IDgenerator;
 import data.Person.Faculty;
 import data.Person.Student;
 
+
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Session extends Course {
     private String id;
@@ -15,6 +17,29 @@ public class Session extends Course {
     public Session(String department, String code, String description, int minStudentCount, int maxStudentCount){
         super(department, code, description, minStudentCount, maxStudentCount);
     }
+
+    public Session(Course c, IDgenerator generatorAlgorithm){
+        super(c);
+        this.generatorAlgorithm = generatorAlgorithm;
+        makeID();
+    }
+
+    public Session(Session s){
+        super(s);
+        this.id = s.id;
+        this.generatorAlgorithm = s.generatorAlgorithm;
+        this.students = new ArrayList<>();
+        for(Student student: s.students){
+            this.students.add(new Student(student));
+        }
+        this.instructor = new Faculty(s.instructor);
+    }
+
+    public Session(){
+        super();
+
+    }
+
 
     /**
      * Accessor Method
@@ -39,4 +64,6 @@ public class Session extends Course {
     public Faculty getInstructor() { return instructor; }
 
     public void setInstructor(Faculty instructor) { this.instructor = instructor; }
+
+
 }

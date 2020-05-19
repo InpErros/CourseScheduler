@@ -4,11 +4,17 @@ import data.Course.Session;
 
 import java.util.ArrayList;
 
-public class ScheduledStudent {
+public class ScheduledStudent extends Student{
     private ArrayList<Session> classes;
 
     public ScheduledStudent(Student s){
-        // Shallow copy the student here
+        super(s);
         classes = new ArrayList<>();
     }
+
+    public ScheduledStudent(){
+        super();
+    }
+
+    public ArrayList<Session> getClasses() { return classes; }
 }

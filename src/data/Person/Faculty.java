@@ -24,7 +24,18 @@ public class Faculty extends Person{
         this.id = id;
     }
 
-    public Faculty() { }
+    public Faculty() {
+        super(" ", " ", " ", " ", " ", " ", " ", " ", " ");
+        hireDate = " ";
+        tenured = " ";
+        id = " ";
+    }
+
+    public Faculty(Faculty f){
+        super(f);
+        this.hireDate = f.hireDate;
+        this.tenured = f.tenured;
+    }
 
     public String getHireDate() { return hireDate; }
     public void setHireDate(String hireDate) { this.hireDate = hireDate; }

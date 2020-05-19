@@ -22,6 +22,7 @@ public class Student extends Person{
         this.dateOfBirth = " ";
         this.gpa = " ";
         this.registrationDate = " ";
+        this.id = " ";
     }
 
     public Student(String firstName, String middleName, String lastName,
@@ -45,6 +46,13 @@ public class Student extends Person{
         this.gpa = gpa;
         this.registrationDate = registrationDate;
         this.id = id;
+    }
+
+    public Student(Student s){
+        super(s);
+        this.dateOfBirth = s.dateOfBirth;
+        this.gpa = s.gpa;
+        this.registrationDate = s.registrationDate;
     }
 
     /**
@@ -99,4 +107,5 @@ public class Student extends Person{
                 + "," + getCity() + "," + getState() + "," + getZip() + "," + dateOfBirth
                 + "," + gpa  + "," + registrationDate + "," + getID() + ",";
     }
+
 }
