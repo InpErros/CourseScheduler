@@ -24,6 +24,8 @@ public class Faculty extends Person{
         this.id = id;
     }
 
+    public Faculty() { }
+
     public String getHireDate() { return hireDate; }
     public void setHireDate(String hireDate) { this.hireDate = hireDate; }
     public String isTenured() { return tenured; }
