@@ -1,9 +1,10 @@
 package data.Course;
 
-import app.Algorithms.SessionIDGenerator;
+import app.Algorithms.IDgenerator;
 
 public class Session extends Course {
     private String id;
+    private IDgenerator generatorAlgorithm;
 
     public Session(String department, String code, String description, int minStudentCount, int maxStudentCount){
         super(department, code, description, minStudentCount, maxStudentCount);
@@ -15,11 +16,13 @@ public class Session extends Course {
      */
     public String getID() { return id; }
 
+    public void setGeneratorAlgorithm(IDgenerator generatorAlgorithm) { this.generatorAlgorithm = generatorAlgorithm; }
+
     /**
-     * Overridden Mutator Method using a session specific algorithm to generate a unique ID
-     * @see SessionIDGenerator
+     * Overridden Method using a algorithm selected at runtime to generate an ID
+     * @see app.Algorithms.IDgenerator
      */
-    public void setID() {
-        id = new SessionIDGenerator().generateID();
+    public void makeID() {
+        id = "c" + generatorAlgorithm.generateID();
     }
 }

@@ -7,7 +7,13 @@ public class Course {
     private int minStudentCount;
     private int maxStudentCount;
 
-    public Course() {}
+    public Course() {
+        this.department = " ";
+        this.code = " ";
+        this.description = " ";
+        this.maxStudentCount = 0;
+        this.minStudentCount = 0;
+    }
 
     public Course(String department, String code, String description, int minStudentCount, int maxStudentCount) {
         this.department = department;
@@ -76,4 +82,9 @@ public class Course {
      * @param maxStudentCount
      */
     public void setMaxStudentCount(int maxStudentCount) { this.maxStudentCount = maxStudentCount; }
+
+    @Override
+    public String toString() {
+        return "Course ID: " + getDepartment() + getCode() + "\n" + getDescription() + "\nMin. Students: " + getMinStudentCount() + " Max. Students: " + getMaxStudentCount() + "\n";
+    }
 }
