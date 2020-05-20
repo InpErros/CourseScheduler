@@ -48,11 +48,7 @@ public class Course {
      * @param c Course object to be copied
      */
     public Course(Course c){
-        this.department = c.department;
-        this.code = c.code;
-        this.description = c.description;
-        this.minStudentCount = c.minStudentCount;
-        this.maxStudentCount = c.maxStudentCount;
+        this(c.department,c.code,c.description,c.minStudentCount,c.maxStudentCount);
     }
 
     /**

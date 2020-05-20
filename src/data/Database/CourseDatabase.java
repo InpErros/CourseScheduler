@@ -72,7 +72,7 @@ public class CourseDatabase implements Database {
         for(Course c: db){
             if(c.getDepartment().equals(department)){
                 if(c.getCode().equals(code)){
-                    result = c;
+                    result = new Course(c);
                     found = true;
                 }
             }

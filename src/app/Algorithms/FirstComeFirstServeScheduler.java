@@ -63,14 +63,7 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         moveFaculty(schedule);
         moveScheduledStudents(schedule);
         moveUnscheduledStudents(schedule);
-        // Check if any sessions don't have enough students. Move them to unscheduled. Unschedule the instructors and students.
-        // Check if any session don't have an instructor, add them to the unscheduled list and remove them from students course loads.
-        // Check if any students are not on the scheduled students list. add them to the unscheduled list
-        // Sort ScheduledSessions list by course and move it to the Schedule
-        // Sort Unscheduled Sessions list by course and move it to the schedule
-        // Move Faculty list to schedule
-        // Move scheduled student list to schedule
-        // move unscheduled student list to schedule
+
     }
 
     /**
@@ -173,7 +166,8 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         else{ // List is empty
             tempScheduledStudents.add(new ScheduledStudent(student)); // Add student to the list;
             tempScheduledStudents.get(0).getClasses().add(currentSession); // add the current session to their course load
-            currentSession.getStudents().add(student); // Add the student to the session.
+            //currentSession.getStudents().add(new Student(student)); // Add the student to the session.
+            currentSession.addStudent(student);
         }
     }
 

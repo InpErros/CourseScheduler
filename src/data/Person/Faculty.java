@@ -76,9 +76,7 @@ public class Faculty extends Person{
      * @param f Faculty object to be copied
      */
     public Faculty(Faculty f){
-        super(f);
-        this.hireDate = f.hireDate;
-        this.tenured = f.tenured;
+        this(f.getFirstName(),f.getMiddleName(),f.getLastName(),f.getEmail(),f.getPhone(),f.getAddress(),f.getCity(),f.getState(),f.getZip(),f.hireDate,f.tenured,f.id);
     }
 
     /**

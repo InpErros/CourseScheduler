@@ -54,19 +54,39 @@ public abstract class Person {
     }
 
     /**
+     * {@code Constructor} that initializes a person object with given data
+     * @param firstName
+     * @param middleName
+     * @param lastName
+     * @param email
+     * @param phone
+     * @param address
+     * @param city
+     * @param state
+     * @param zip
+     */
+    public Person(String firstName, String middleName, String lastName,
+                  String email, String phone, String address, String city,
+                  String state, String zip, String id){
+
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.id = id;
+    }
+
+    /**
      * Initializes a new person as a copy of another
      * @param p object to be copied
      */
     public Person(Person p){
-        this.firstName = p.firstName;
-        this.middleName = p.middleName;
-        this.lastName = p.lastName;
-        this.email = p.email;
-        this.phone = p.phone;
-        this.address = p.address;
-        this.city = p.city;
-        this.state = p.state;
-        this.zip = p.zip;
+        this(p.firstName,p.middleName,p.lastName,p.email,p.phone,p.address,p.city,p.state,p.zip,p.id);
     }
 
     /**

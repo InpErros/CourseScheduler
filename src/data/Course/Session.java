@@ -2,6 +2,7 @@ package data.Course;
 
 import app.Algorithms.IDgenerator;
 import data.Person.Faculty;
+import data.Person.Instructor;
 import data.Person.Student;
 
 import java.util.ArrayList;
@@ -46,14 +47,22 @@ public class Session extends Course {
      * @param s Session to be copied
      */
     public Session(Session s){
-        super(s);
-        this.id = s.id;
-        this.generatorAlgorithm = s.generatorAlgorithm;
+        this(s.getDepartment(),s.getCode(),s.getDescription(),s.getMinStudentCount(),s.getMaxStudentCount(),s.id,s.generatorAlgorithm, s.instructor);
         this.students = new ArrayList<>();
         for(Student student: s.students){
             this.students.add(new Student(student));
         }
-        this.instructor = new Faculty(s.instructor);
+    }
+
+    public Session(String department, String code, String description, int minStudentCount, int maxStudentCount, String id, IDgenerator generatorAlgorithm, Faculty instructor){
+        this.setDepartment(department);
+        this.setCode(code);
+        this.setDescription(description);
+        this.setMinStudentCount(minStudentCount);
+        this.setMaxStudentCount(maxStudentCount);
+        this.id = id;
+        this.generatorAlgorithm = generatorAlgorithm;
+        this.instructor = new Faculty(instructor);
     }
 
     /**
@@ -109,5 +118,8 @@ public class Session extends Course {
             str.append(s.toShortString());
         }
         return str.toString();
+    }
+    public void addStudent(Student s){
+        students.add(s);
     }
 }

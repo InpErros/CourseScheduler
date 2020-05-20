@@ -108,7 +108,7 @@ public class StudentDatabase implements Database{
 
         for(Student s: db){
             if(s.getID().equals(id)){
-                result = s;
+                result = new Student(s);
                 found = true;
             }
         }

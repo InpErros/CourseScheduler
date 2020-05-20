@@ -24,6 +24,8 @@ public class Schedule {
     private ArrayList<ScheduledStudent> scheduledStudents;
     private ArrayList<Student> unscheduledStudents;
 
+    public Schedule() {}
+
     /**
      * initializes ArrayLists and creates a schedule using the given scheduling algorithm
      * @param generatorAlgorithm the generating algorithm for session ids

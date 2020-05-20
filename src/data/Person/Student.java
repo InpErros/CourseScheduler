@@ -86,10 +86,7 @@ public class Student extends Person{
      * @param s Student object to be copied
      */
     public Student(Student s){
-        super(s);
-        this.dateOfBirth = s.dateOfBirth;
-        this.gpa = s.gpa;
-        this.registrationDate = s.registrationDate;
+        this(s.getFirstName(),s.getMiddleName(),s.getLastName(),s.getEmail(),s.getPhone(),s.getAddress(),s.getCity(),s.getState(),s.getZip(), s.dateOfBirth,s.gpa,s.registrationDate, s.id);
     }
 
     /**
