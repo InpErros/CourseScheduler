@@ -20,12 +20,10 @@ public class Main {
         SessionWishlist swl = SessionWishlist.getInstance();
         Scanner input = new Scanner(System.in);
 
-        try {
-            Schedule schedule = new Schedule(new BasicRngId(), new FirstComeFirstServeScheduler());
-        }
-        catch(NullPointerException ex){
-            System.out.println(ex.getMessage());
-        }
+
+        Schedule schedule = new Schedule(new BasicRngId(), new FirstComeFirstServeScheduler());
+        schedule.makeSchedule();
+
         boolean validInput = false;
         int choice = 0;
         boolean cont = true;

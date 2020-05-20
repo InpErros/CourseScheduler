@@ -15,9 +15,9 @@ import java.util.ArrayList;
  * @version 0.1
  */
 public class FirstComeFirstServeScheduler implements Scheduler {
-    private final SessionWishlist swl = SessionWishlist.getInstance();
+    private SessionWishlist swl = SessionWishlist.getInstance();
     private ArrayList<Session> tempSessions;
-    private ArrayList<ScheduledStudent> tempScheduledStudents;
+    private ArrayList<ScheduledStudent> tempScheduledStudents = new ArrayList<>();
     private ArrayList<Instructor> tempFaculty;
     private ArrayList<Course> tempUnSessions;
     private ArrayList<Student> tempUnStudents;
@@ -42,6 +42,7 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         Session currentSession;
 
         for(RegistrationRequest request: swl.getWishlist()){ // For Each Request
+
             for(Course requestedCourse: request.getCourses()){ // For Each Requested Course
                 if(!hasNotFullSession(requestedCourse)){ // If there is a not full session for the given course
                     currentSession = makeSession(requestedCourse, schedule.getGeneratorAlgorithm()); // Make a session
@@ -149,11 +150,13 @@ public class FirstComeFirstServeScheduler implements Scheduler {
     public void addStudent(Session currentSession, Student student){
         Configuration config = Configuration.getInstance();
 
-        if(tempScheduledStudents.size() > 0){ // If the list of scheduled students isn't empty
-            for(ScheduledStudent ss: tempScheduledStudents){ // For every scheduled student
-                if(student.getID().equals(ss.getID())) { // Find the matching ID if they are on the list
-                    if (ss.getClasses().size() < config.getMaxSessionsPerStudent()) { // if they have space in course load then they can register
-                        ss.getClasses().add(currentSession);
+        int size = tempScheduledStudents.size();
+
+        if(size > 0){ // If the list of scheduled students isn't empty
+            for(int i = 0; i < size; ++i){ // For every scheduled student
+                if(student.getID().equals(tempScheduledStudents.get(i).getID())) { // Find the matching ID if they are on the list
+                    if (tempScheduledStudents.get(i).getClasses().size() < config.getMaxSessionsPerStudent()) { // if they have space in course load then they can register
+                        tempScheduledStudents.get(i).getClasses().add(currentSession);
                         currentSession.getStudents().add(student);
                     }
                 }
@@ -166,8 +169,7 @@ public class FirstComeFirstServeScheduler implements Scheduler {
         else{ // List is empty
             tempScheduledStudents.add(new ScheduledStudent(student)); // Add student to the list;
             tempScheduledStudents.get(0).getClasses().add(currentSession); // add the current session to their course load
-            //currentSession.getStudents().add(new Student(student)); // Add the student to the session.
-            currentSession.addStudent(student);
+            currentSession.getStudents().add(student); // Add the student to the session.
         }
     }
 

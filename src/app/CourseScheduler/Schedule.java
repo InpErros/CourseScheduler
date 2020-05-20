@@ -41,6 +41,10 @@ public class Schedule {
         scheduledStudents =  new ArrayList<>();
         unscheduledStudents = new ArrayList<>();
 
+
+    }
+
+    public void makeSchedule(){
         this.schedulerAlgorithm.schedule(this);
     }
 

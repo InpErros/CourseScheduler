@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Session extends Course {
     private String id;
     private IDgenerator generatorAlgorithm;
-    private ArrayList<Student> students;
+    private ArrayList<Student> students = new ArrayList<>();
     private Faculty instructor;
 
     /**
@@ -39,6 +39,7 @@ public class Session extends Course {
     public Session(Course c, IDgenerator generatorAlgorithm){
         super(c);
         this.generatorAlgorithm = generatorAlgorithm;
+        this.students = new ArrayList<>();
         makeID();
     }
 
@@ -70,6 +71,7 @@ public class Session extends Course {
      */
     public Session(){
         super();
+        students = new ArrayList<>();
     }
 
 
